@@ -1,4 +1,4 @@
-package liuz.server;
+package server;
 
 import com.sun.org.apache.bcel.internal.generic.Select;
 
