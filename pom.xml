@@ -11,7 +11,13 @@
     <modules>
         <module>java-crawler</module>
         <module>java-algorithm</module>
+        <module>java-jdbc</module>
+        <module>java-basic</module>
     </modules>
 
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
 </project>

@@ -1,4 +1,4 @@
-package effective.annotation;
+package edu.zju.liuz.effective.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

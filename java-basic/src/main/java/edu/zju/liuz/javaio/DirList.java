@@ -1,4 +1,4 @@
-package javaio;
+package edu.zju.liuz.javaio;
 
 /**
  * Created by Liu.Zheng on 2017/3/28.

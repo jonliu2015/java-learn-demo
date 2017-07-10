@@ -1,4 +1,4 @@
-package server;
+package edu.zju.liuz.server;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -15,7 +15,7 @@ public class BioServer {
         try {
             while (true) {
                 final Socket socket = serverSocket.accept();
-                System.out.println("bio server at: http://localhost:" + port);
+                System.out.println("bio edu.zju.liuz.server at: http://localhost:" + port);
                 new Thread(() -> {
                     OutputStream outputStream;
                     try {

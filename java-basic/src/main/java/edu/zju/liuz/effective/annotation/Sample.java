@@ -1,4 +1,4 @@
-package effective.annotation;
+package edu.zju.liuz.effective.annotation;
 
 /**
  * Created by Liu.Zheng on 2017/3/27.

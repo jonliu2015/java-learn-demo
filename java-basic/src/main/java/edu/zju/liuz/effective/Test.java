@@ -1,14 +1,8 @@
-package effective;
+package edu.zju.liuz.effective;
 
-import effective.generic.MyGeneric;
-import effective.second.User;
-import effective.third.SingleThree;
-
-import java.security.PublicKey;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import edu.zju.liuz.effective.generic.MyGeneric;
+import edu.zju.liuz.effective.second.User;
+import edu.zju.liuz.effective.third.SingleThree;
 
 /**
  * Created by Liu.Zheng on 2017/3/5.

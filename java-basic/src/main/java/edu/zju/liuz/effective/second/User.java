@@ -1,4 +1,4 @@
-package effective.second;
+package edu.zju.liuz.effective.second;
 
 /**
  * Created by Liu.Zheng on 2017/3/5.

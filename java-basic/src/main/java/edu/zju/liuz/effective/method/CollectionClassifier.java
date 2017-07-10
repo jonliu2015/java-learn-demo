@@ -1,4 +1,4 @@
-package effective.method;
+package edu.zju.liuz.effective.method;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package effective.generic;
+package edu.zju.liuz.effective.generic;
 
 import java.util.List;
 

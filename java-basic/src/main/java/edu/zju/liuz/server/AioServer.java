@@ -1,5 +1,6 @@
-package server;
+package edu.zju.liuz.server;
 
+import java.io.IOException;
 import java.nio.channels.AsynchronousServerSocketChannel;
 
 /**
@@ -8,6 +9,12 @@ import java.nio.channels.AsynchronousServerSocketChannel;
 public class AioServer {
     private AsynchronousServerSocketChannel asynchronousServerSocketChannel;
     AioServer(int port) {
-        asynchronousServerSocketChannel = AsynchronousServerSocketChannel.open();
+        try {
+            asynchronousServerSocketChannel = AsynchronousServerSocketChannel.open();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
