@@ -28,6 +28,12 @@ public class Main {
                 .usingJobData("jobName", "kfc")
                 .build();
 
+        JobDetail job1 = newJob(MyJob.class)
+                .withIdentity("myJob1", "group1")
+                .usingJobData("key1", "use key two")
+                .usingJobData("jobName", "kfcasdf")
+                .build();
+
         // Trigger the job to run now, and then every 40 seconds
         Trigger trigger = newTrigger()
                 .withIdentity("myTrigger", "group1")
@@ -36,17 +42,10 @@ public class Main {
                         .withIntervalInSeconds(5)
                         .repeatForever())
                 .build();
-        // Trigger the job to run now, and then every 40 seconds
-        Trigger trigger0 = newTrigger()
-                .withIdentity("myTrigger0", "group1")
-                .startNow()
-                .withSchedule(simpleSchedule()
-                        .withIntervalInSeconds(6)
-                        .repeatForever())
-                .build();
 
         // Tell quartz to schedule the job using our trigger
         sched.scheduleJob(job, trigger);
+        sched.scheduleJob(job1, trigger);
         System.out.println("------------------------------END-------------------------------");
     }
 
