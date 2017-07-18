@@ -462,9 +462,308 @@ public class Main {
      No
      4 4 1
      思路：1.将十进制数转换为b进制；2.判断转换后是否为Palindromic Number
+     注意：当base比较大的时候，我们无法直接写出转换后的数字，因此用int数组来表示转换后数字。
+     结果：未通过6,7
+     * */
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        int num = scanner.nextInt();
+//        int base = scanner.nextInt();
+//        int[] trans = trans(num, base);
+//        if (isPali(trans)) System.out.println("Yes");
+//        else System.out.println("No");
+//        for (int i = 0; i < trans.length - 1; i++) {
+//            System.out.print(trans[i] + " ");
+//        }
+//        System.out.print(trans[trans.length - 1]);
+//    }
+//    public static int[] trans(int num, int base) {
+//        int temp = 0;
+//        int[] is = new int[8];
+//        int count = 0;
+//        do {
+//            temp = num%base;
+//            is[count] = temp;
+//            num = num/base;
+//            count++;
+//        } while (num!=0);
+//        int[] result = new int[count];
+//        for (int i = 0; i < count; i++) {
+//            result[count - i - 1] = is[i];
+//        }
+//        return result;
+//    }
+//    public static boolean isPali(int[] num) {
+//        for (int i = 0; i < num.length/2; i++) {
+//            if (num[i]!=num[num.length - 1 - i]) return false;
+//        }
+//        return true;
+//    }
+
+    /**
+     * pat advanced 1020 Tree Traversals
+     Suppose that all the keys in a binary tree are distinct positive integers. Given the postorder
+     and inorder traversal sequences, you are supposed to output the level order traversal sequence
+     of the corresponding binary tree.
+     Input Specification:
+     Each input file contains one test case. For each case, the first line gives a positive integer
+     N (<=30), the total number of nodes in the binary tree. The second line gives the postorder
+     sequence and the third line gives the inorder sequence. All the numbers in a line are separated
+     by a space.
+     Output Specification:
+     For each test case, print in one line the level order traversal sequence of the corresponding
+     binary tree. All the numbers in a line must be separated by exactly one space, and there must
+     be no extra space at the end of the line.
+     Sample Input:
+     7
+     2 3 1 5 7 6 4
+     1 2 3 4 5 6 7
+     Sample Output:
+     4 1 6 3 5 7 2
+     思路：1.利用后序和中序创建树（学习一个！）；2.层次遍历该树
+     结果：全部通过
+     * */
+//    public static void main(String[] args) {
+//        Node root = new Node();
+//        Scanner scanner = new Scanner(System.in);
+//        int sum = scanner.nextInt();
+//        int[] postorder = new int[sum];
+//        int[] inorder = new int[sum];
+//        for (int i = 0; i < sum; i++) {
+//            postorder[i] = scanner.nextInt();
+//        }
+//        for (int i = 0; i < sum; i++) {
+//            inorder[i] = scanner.nextInt();
+//        }
+//        createTree(root, postorder, inorder);
+//        levelOrderTree(root);
+//    }
+//    public static void createTree(Node root, int[] post, int[] in) {
+//        root.key = post[post.length - 1];
+//        if (post.length == 1) return;
+//        int i = 0;
+//        for (; i < in.length; i++) {
+//            if (in[i]==root.key) break;
+//        }
+//        if (i > 0) {
+//            int[] leftpost = new int[i];
+//            int[] leftin = new int[i];
+//            for (int j = 0; j < i; j++) {
+//                leftpost[j] = post[j];
+//                leftin[j] = in[j];
+//            }
+//            Node left = new Node();
+//            root.left = left;
+//            createTree(left, leftpost, leftin);
+//        }
+//        if (post.length - i - 1 > 0) {
+//            int[] rightpost = new int[post.length - i - 1];
+//            int[] rightin = new int[post.length - i - 1];
+//            for (int j = 0; j < post.length - i - 1; j++) {
+//                rightpost[j] = post[j + i];
+//                rightin[j] = in[j + i + 1];
+//            }
+//            Node right = new Node();
+//            root.right = right;
+//            createTree(right, rightpost, rightin);
+//        }
+//    }
+//    public static void levelOrderTree(Node root) {
+//        Queue<Node> queue = new ArrayDeque<>();
+//        queue.add(root);
+//        Node node = queue.remove();
+//        System.out.print(node.key);
+//        if (node.left!=null) queue.add(node.left);
+//        if (node.right!=null) queue.add(node.right);
+//        while (!queue.isEmpty()) {
+//            node = queue.remove();
+//            System.out.print(" " + node.key);
+//            if (node.left!=null) queue.add(node.left);
+//            if (node.right!=null) queue.add(node.right);
+//        }
+//    }
+//    public static class Node {
+//        Node left;
+//        Node right;
+//        int key;
+//    }
+
+    /**
+     pat advanced 1021 Deepest Root (25)
+     A graph which is connected and acyclic can be considered a tree. The height of the tree
+     depends on the selected root. Now you are supposed to find the root that results in a
+     highest tree. Such a root is called the deepest root.
+     Input Specification:
+     Each input file contains one test case. For each case, the first line contains a positive
+     integer N (<=10000) which is the number of nodes, and hence the nodes are numbered from 1
+     to N. Then N-1 lines follow, each describes an edge by given the two adjacent nodes' numbers.
+     Output Specification:
+     For each test case, print each of the deepest roots in a line. If such a root is not unique,
+     print them in increasing order of their numbers. In case that the given graph is not a tree,
+     print "Error: K components" where K is the number of connected components in the graph.
+     Sample Input 1:
+     5
+     1 2
+     1 3
+     1 4
+     2 5
+     Sample Output 1:
+     3
+     4
+     5
+     Sample Input 2:
+     5
+     1 3
+     1 4
+     2 5
+     3 4
+     Sample Output 2:
+     Error: 2 components
+     图相关题目之后做
+     * */
+
+    /**
+     pat advanced 1022 Digital Library
+     A Digital Library contains millions of books, stored according to their titles, authors,
+     key words of their abstracts, publishers, and published years. Each book is assigned an
+     unique 7-digit number as its ID. Given any query from a reader, you are supposed to output
+     the resulting books, sorted in increasing order of their ID's.
+     Input Specification:
+     Each input file contains one test case. For each case, the first line contains a positive
+     integer N (<=10000) which is the total number of books. Then N blocks follow, each contains
+     the information of a book in 6 lines:
+     Line #1: the 7-digit ID number;
+     Line #2: the book title -- a string of no more than 80 characters;
+     Line #3: the author -- a string of no more than 80 characters;
+     Line #4: the key words -- each word is a string of no more than 10 characters without any
+     white space, and the keywords are separated by exactly one space;
+     Line #5: the publisher -- a string of no more than 80 characters;
+     Line #6: the published year -- a 4-digit number which is in the range [1000, 3000].
+     It is assumed that each book belongs to one author only, and contains no more than 5 key words;
+     there are no more than 1000 distinct key words in total; and there are no more than 1000 distinct
+     publishers.
+     After the book information, there is a line containing a positive integer M (<=1000) which is
+     the number of user's search queries. Then M lines follow, each in one of the formats shown below:
+     1: a book title
+     2: name of an author
+     3: a key word
+     4: name of a publisher
+     5: a 4-digit number representing the year
+     Output Specification:
+     For each query, first print the original query in a line, then output the resulting book ID's in
+     increasing order, each occupying a line. If no book is found, print "Not Found" instead.
+     Sample Input:
+     3
+     1111111
+     The Testing Book
+     Yue Chen
+     test code debug sort keywords
+     ZUCS Print
+     2011
+     3333333
+     Another Testing Book
+     Yue Chen
+     test code sort keywords
+     ZUCS Print2
+     2012
+     2222222
+     The Testing Book
+     CYLL
+     keywords debug book
+     ZUCS Print2
+     2011
+     6
+     1: The Testing Book
+     2: Yue Chen
+     3: keywords
+     4: ZUCS Print
+     5: 2011
+     3: blablabla
+     Sample Output:
+     1: The Testing Book
+     1111111
+     2222222
+     2: Yue Chen
+     1111111
+     3333333
+     3: keywords
+     1111111
+     2222222
+     3333333
+     4: ZUCS Print
+     1111111
+     5: 2011
+     1111111
+     2222222
+     3: blablabla
+     Not Found
+     思路：1.利用Map存储书信息；2.根据查询类型到相应Map中查找书籍
+     * */
+//    public static void main(String[] args) {
+//        Set<Integer> books = new HashSet<>();
+//        Map<String, List<Integer>> title = new HashMap<>();
+//        Map<String, List<Integer>> author = new HashMap<>();
+//        Map<String, List<Integer>> keyword = new HashMap<>();
+//        Map<String, List<Integer>> publisher = new HashMap<>();
+//        Map<Integer, List<Integer>> year = new HashMap<>();
+//        Scanner scanner = new Scanner(System.in);
+//        int booksum = scanner.nextInt();
+//        for (int i = 0; i < booksum; i++) {
+//            int id = scanner.nextInt();
+//            if (!books.contains(id)) {
+//                books.add(id);
+//                String s = scanner.next();
+//                if (title.keySet().contains(s)) {
+//
+//                } else {
+//
+//                }
+//            }
+//        }
+//        int querysum = scanner.nextInt();
+//        String[] query = new String[querysum];
+//        for (int i = 0; i < querysum; i++) {
+//            query[i] = scanner.next();
+//        }
+//        String[] result = new String[querysum];
+//
+//    }
+//    public static String find(String s) {
+//        String result = "";
+//        return result;
+//    }
+
+    /**
+     pat advanced 1023 Have Fun with Numbers (20)
+     Notice that the number 123456789 is a 9-digit number consisting exactly the numbers from 1 to 9,
+     with no duplication. Double it we will obtain 246913578, which happens to be another 9-digit
+     number consisting exactly the numbers from 1 to 9, only in a different permutation. Check to see
+     the result if we double it again!
+     Now you are suppose to check if there are more numbers with this property. That is, double a given
+     number with k digits, you are to tell if the resulting number consists of only a permutation of
+     the digits in the original number.
+     Input Specification:
+     Each input file contains one test case. Each case contains one positive integer with no more than
+     20 digits.
+     Output Specification:
+     For each test case, first print in a line "Yes" if doubling the input number gives a number that
+     consists of only a permutation of the digits in the original number, or "No" if not. Then in the
+     next line, print the doubled number.
+     Sample Input:
+     1234567899
+     Sample Output:
+     Yes
+     2469135798
+     思路：1.大数乘以2（学习一个！分治思想）；2.对两个数字每位计数
      * */
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String origin = scanner.next();
 
+    }
+    public static String doubleNum(String num) {
+        String result = "";
+        return result;
     }
 
 }
