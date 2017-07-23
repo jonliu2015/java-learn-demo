@@ -756,29 +756,29 @@ public class Main {
      2469135798
      思路：1.大数乘以2（学习一个！分治思想）；2.对两个数字每位计数
      * */
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String origin = scanner.next();
-        String trans = doubleNum(origin);
-        int[] count1 = new int[10];
-        int[] count2 = new int[10];
-        boolean yes = true;
-        for (char c: trans.toCharArray()) {
-            count2[c-'0']++;
-        }
-        for (char c: origin.toCharArray()) {
-            count1[c-'0']++;
-        }
-        for (int i = 0; i < 10; i++) {
-            if (count1[i]!=count2[i]) {
-                yes = false;
-                break;
-            }
-        }
-        if (yes) System.out.println("Yes");
-        else System.out.println("No");
-        System.out.println(trans);
-    }
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        String origin = scanner.next();
+//        String trans = doubleNum(origin);
+//        int[] count1 = new int[10];
+//        int[] count2 = new int[10];
+//        boolean yes = true;
+//        for (char c: trans.toCharArray()) {
+//            count2[c-'0']++;
+//        }
+//        for (char c: origin.toCharArray()) {
+//            count1[c-'0']++;
+//        }
+//        for (int i = 0; i < 10; i++) {
+//            if (count1[i]!=count2[i]) {
+//                yes = false;
+//                break;
+//            }
+//        }
+//        if (yes) System.out.println("Yes");
+//        else System.out.println("No");
+//        System.out.println(trans);
+//    }
     public static String doubleNum(String num) {
         String result = "";
         char[] cs = num.toCharArray();
@@ -830,6 +830,312 @@ public class Main {
      思路：1.步骤次数内做题目所给运算；2.循环判断是否Palindromic Number；
      * */
 
-    
 
+    /**
+     1027	Colors in Mars (20)
+     People in Mars represent the colors in their computers in a similar way as the Earth people. That is,
+     a color is represented by a 6-digit number, where the first 2 digits are for Red, the middle 2 digits
+     for Green, and the last 2 digits for Blue. The only difference is that they use radix 13 (0-9 and A-C)
+     instead of 16. Now given a color in three decimal numbers (each between 0 and 168), you are supposed to
+     output their Mars RGB values.
+     Input
+     Each input file contains one test case which occupies a line containing the three decimal color values.
+     Output
+     For each test case you should output the Mars RGB value in the following format: first output "#", then
+     followed by a 6-digit number where all the English characters must be upper-cased. If a single color is
+     only 1-digit long, you must print a "0" to the left.
+     Sample Input
+     15 43 71
+     Sample Output
+     #123456
+     思路：将13进制转换为16进制即可
+     注意：一位时0的处理
+     * */
+
+
+
+    /**
+     1028. List Sorting (25)
+     Excel can sort records according to any column. Now you are supposed to imitate this function.
+     Input
+     Each input file contains one test case. For each case, the first line contains two integers N (<=100000)
+     and C, where N is the number of records and C is the column that you are supposed to sort the records
+     with. Then N lines follow, each contains a record of a student. A student's record consists of his or
+     her distinct ID (a 6-digit number), name (a string with no more than 8 characters without space), and
+     grade (an integer between 0 and 100, inclusive).
+     Output
+     For each test case, output the sorting result in N lines. That is, if C = 1 then the records must be
+     sorted in increasing order according to ID's; if C = 2 then the records must be sorted in non-decreasing
+     order according to names; and if C = 3 then the records must be sorted in non-decreasing order according
+     to grades. If there are several students who have the same name or grade, they must be sorted according
+     to their ID's in increasing order.
+     Sample Input 1
+     3 1
+     000007 James 85
+     000010 Amy 90
+     000001 Zoe 60
+     Sample Output 1
+     000001 Zoe 60
+     000007 James 85
+     000010 Amy 90
+     Sample Input 2
+     4 2
+     000007 James 85
+     000010 Amy 90
+     000001 Zoe 60
+     000002 James 98
+     Sample Output 2
+     000010 Amy 90
+     000002 James 98
+     000007 James 85
+     000001 Zoe 60
+     Sample Input 3
+     4 3
+     000007 James 85
+     000010 Amy 90
+     000001 Zoe 60
+     000002 James 90
+     Sample Output 3
+     000001 Zoe 60
+     000007 James 85
+     000002 James 90
+     000010 Amy 90
+     思路：使用comparable接口，student对象保存type从而判断是对哪列排序
+     * */
+    public static class Student implements Comparable<Student>{
+        int id;
+        String name;
+        int grade;
+        int type;
+
+        @Override
+        public int compareTo(Student o) {
+            if (type==1) {
+                if (this.id>o.id) return 1;
+                if (this.id<o.id) return -1;
+                return 0;
+            } else if (type==2) {
+                return this.name.compareTo(o.name);
+            } else if (type==3) {
+                if (this.grade>o.grade) return 1;
+                return 0;
+            }
+            return 0;
+        }
+    }
+
+
+    /**
+     1029. Median (25)
+     Given an increasing sequence S of N integers, the median is the number at the middle position.
+     For example, the median of S1={11, 12, 13, 14} is 12, and the median of S2={9, 10, 15, 16, 17} is 15.
+     The median of two sequences is defined to be the median of the nondecreasing sequence which contains
+     all the elements of both sequences. For example, the median of S1 and S2 is 13.
+     Given two increasing sequences of integers, you are asked to find their median.
+     Input
+     Each input file contains one test case. Each case occupies 2 lines, each gives the information of a
+     sequence. For each sequence, the first positive integer N (<=1000000) is the size of that sequence.
+     Then N integers follow, separated by a space. It is guaranteed that all the integers are in the range
+     of long int.
+     Output
+     For each test case you should output the median of the two given sequences in a line.
+     Sample Input
+     4 11 12 13 14
+     5 9 10 15 16 17
+     Sample Output
+     13
+     思路：归并排序？其实不用排序，归并的时候找到中间位置的那个就是中位数；由于超限，考虑不储存list2，
+     在接受输入时就进行处理
+     结果：归并排序内存超限，不行；但还是内存超限，不知为何。
+     * */
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        //List<Long> list = new ArrayList<>();
+//        int length1 = scanner.nextInt();
+//        long[] list1 = new long[length1];
+//        for (int i = 0; i < length1; i++) {
+//            list1[i] = scanner.nextLong();
+//            //list.add(scanner.nextLong());
+//        }
+//        int length2 = scanner.nextInt();
+//        long[] list2 = new long[length2];
+//        for (int i = 0; i < length2; i++) {
+//            list2[i] = scanner.nextLong();
+//            //list.add(scanner.nextLong());
+//        }
+//        //Collections.sort(list);
+//        //int[] list = merge(list1, list2);
+//        //int mid = (length1+length2)%2==1?(length1+length2)/2:(length1+length2-1)/2;
+//        System.out.println(merge(list1, list2));
+//
+//    }
+
+    public static long merge(long[] list1, long[] list2) {
+        int length1 = list1.length;
+        int length2 = list2.length;
+        int index1 = 0;
+        int index2 = 0;
+        int mid = (length1+length2)%2==1?(length1+length2)/2:(length1+length2-1)/2;
+        long num = 0;
+        for (int i = 0; i <= mid; i++) {
+            if (index1==length1) num = list2[index2++];
+            else if (index2==length2) num = list1[index1++];
+            else if (list1[index1]<list2[index2]) num = list1[index1++];
+            else if (list1[index1]>list2[index2]) num = list2[index2++];
+            else {
+                num = list1[index1];
+                index1++;
+                index2++;
+            }
+        }
+        return num;
+    }
+
+    public static int[] merge(int[] list1, int[] list2) {
+        int length1 = list1.length;
+        int length2 = list2.length;
+        int[] list = new int[length1 + length2];
+        int index1 = 0;
+        int index2 = 0;
+        for (int i = 0; i < length1 + length2; i++) {
+            if (index1==length1) list[i] = list2[index2++];
+            else if (index2==length2) list[i] = list1[index1++];
+            else if (list1[index1]<list2[index2]) list[i] = list1[index1++];
+            else if (list1[index1]>list2[index2]) list[i] = list2[index2++];
+            else {
+                list[i++] = list1[index1++];
+                list[i] = list2[index2++];
+            }
+        }
+        return list;
+    }
+
+    /**
+     1030. Travel Plan (30)
+     A traveler's map gives the distances between cities along the highways, together with the cost
+     of each highway. Now you are supposed to write a program to help a traveler to decide the shortest
+     path between his/her starting city and the destination. If such a shortest path is not unique, you
+     are supposed to output the one with the minimum cost, which is guaranteed to be unique.
+     Input Specification:
+     Each input file contains one test case. Each case starts with a line containing 4 positive integers
+     N, M, S, and D, where N (<=500) is the number of cities (and hence the cities are numbered from 0
+     to N-1); M is the number of highways; S and D are the starting and the destination cities,
+     respectively. Then M lines follow, each provides the information of a highway, in the format:
+     City1 City2 Distance Cost
+     where the numbers are all integers no more than 500, and are separated by a space.
+     Output Specification:
+     For each test case, print in one line the cities along the shortest path from the starting point to
+     the destination, followed by the total distance and the total cost of the path. The numbers must be
+     separated by a space and there must be no extra space at the end of output.
+     Sample Input
+     4 5 0 3
+     0 1 1 20
+     1 3 2 30
+     0 3 4 10
+     0 2 2 20
+     2 3 1 20
+     Sample Output
+     0 2 3 3 40
+     * */
+
+
+    /**
+     1031. Hello World for U (20)
+     Given any string of N (>=5) characters, you are asked to form the characters into the shape of U.
+     For example, "helloworld" can be printed as:
+     h  d
+     e  l
+     l  r
+     lowo
+     That is, the characters must be printed in the original order, starting top-down from the left
+     vertical line with n1 characters, then left to right along the bottom line with n2 characters,
+     and finally bottom-up along the vertical line with n3 characters. And more, we would like U to
+     be as squared as possible -- that is, it must be satisfied that n1 = n3 = max { k| k <= n2 for
+     all 3 <= n2 <= N } with n1 + n2 + n3 - 2 = N.
+     Input Specification:
+     Each input file contains one test case. Each case contains one string with no less than 5 and
+     no more than 80 characters in a line. The string contains no white space.
+     Output Specification:
+     For each test case, print the input string in the shape of U as specified in the description.
+     Sample Input:
+     helloworld!
+     Sample Output:
+     h   !
+     e   d
+     l   l
+     lowor
+     思路：主要是要计算出n1=n3=(N+2)/3，n2=N+2-n1-n3，每行拼接好字符串即可
+     * */
+
+    /**
+     To store English words, one method is to use linked lists and store a word letter by letter.
+     To save some space, we may let the words share the same sublist if they share the same suffix.
+     For example, "loading" and "being" are stored as showed in Figure 1.
+     Figure 1
+     You are supposed to find the starting position of the common suffix (e.g. the position of "i"
+     in Figure 1).
+     Input Specification:
+     Each input file contains one test case. For each case, the first line contains two addresses
+     of nodes and a positive N (<= 105), where the two addresses are the addresses of the first nodes
+     of the two words, and N is the total number of nodes. The address of a node is a 5-digit positive
+     integer, and NULL is represented by -1.
+     Then N lines follow, each describes a node in the format:
+     Address Data Next
+     where Address is the position of the node, Data is the letter contained by this node which is an
+     English letter chosen from {a-z, A-Z}, and Next is the position of the next node.
+     Output Specification:
+     For each case, simply output the 5-digit starting position of the common suffix. If the two words
+     have no common suffix, output "-1" instead.
+     Sample Input 1:
+     11111 22222 9
+     67890 i 00002
+     00010 a 12345
+     00003 g -1
+     12345 D 67890
+     00002 n 00003
+     22222 B 23456
+     11111 L 00001
+     23456 e 67890
+     00001 o 00010
+     Sample Output 1:
+     67890
+     Sample Input 2:
+     00001 00002 4
+     00001 a 10001
+     10001 s -1
+     00002 a 10002
+     10002 t -1
+     Sample Output 2:
+     -1
+     思路：遍历节点的next，有无相同；
+     结果：运行超时？？？
+     * */
+    public static void main(String[] srg) {
+        Scanner scanner = new Scanner(System.in);
+        String head1 = scanner.next();
+        String head2 = scanner.next();
+        int amount = scanner.nextInt();
+        LetterNode[] letterNodes = new LetterNode[amount];
+        for (int i = 0; i < amount; i++) {
+            letterNodes[i] = new LetterNode();
+            letterNodes[i].pre = scanner.next();
+            letterNodes[i].value = scanner.next();
+            letterNodes[i].next = scanner.next();
+        }
+        Set<String> set = new HashSet<>();
+        String re = "-1";
+        for (LetterNode letterNode: letterNodes) {
+            if (set.contains(letterNode.next)) {
+                re = letterNode.next;
+            } else {
+                set.add(letterNode.next);
+            }
+        }
+        System.out.println(re);
+    }
+    public static class LetterNode {
+        String pre;
+        String next;
+        String value;
+    }
 }
