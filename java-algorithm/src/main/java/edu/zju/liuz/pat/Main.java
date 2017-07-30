@@ -1483,21 +1483,21 @@ public class Main {
      5 888 666 666 888 888
      Sample Output 2:
      None
-     思路：？？？
+     思路：？？？todo
      * */
-    public static void main(String[] s) {
-        Scanner scanner = new Scanner(System.in);
-        int sum = scanner.nextInt();
-        Set<Integer> set = new HashSet<>();
-        int[] is = new int[sum];
-        for (int i = 0; i < sum; i++){
-            is[i] = scanner.nextInt();
-            set.add(is[i]);
-        }
-        for (int i: is) {
-
-        }
-    }
+//    public static void main(String[] s) {
+//        Scanner scanner = new Scanner(System.in);
+//        int sum = scanner.nextInt();
+//        Set<Integer> set = new HashSet<>();
+//        int[] is = new int[sum];
+//        for (int i = 0; i < sum; i++){
+//            is[i] = scanner.nextInt();
+//            set.add(is[i]);
+//        }
+//        for (int i: is) {
+//
+//        }
+//    }
 
     /**
      1042. Shuffling Machine (20)
@@ -1568,6 +1568,7 @@ public class Main {
      * */
 
     /**
+     1044. Shopping in Mars (25)
      Shopping in Mars is quite a different experience. The Mars people pay by chained diamonds.
      Each diamond has a value (in Mars dollars M$). When making the payment, the chain can be cut
      at any position for only once and some of the diamonds are taken off the chain one by one. Once
@@ -1605,12 +1606,284 @@ public class Main {
      Sample Output 2:
      2-4
      4-5
-     思路：1.满足要求的最小值以及相应取法；2.临时满足要求的最小值及取法。
+     思路：1.满足要求的最小值以及相应取法；2.满足要求的临时最小值及取法。(动态规划？)
+     结果：运行超时...得用c++写才行了。。。
+     * */
+//    public static void main(String[] a) {
+//        Scanner scanner = new Scanner(System.in);
+//        int amount = scanner.nextInt();
+//        int N = scanner.nextInt();
+//        int[] ds = new int[amount];
+//        int tempI = 0, tempJ = 0;
+//        int min = 128;
+//        int tempsum = 0;
+//        List<String> result = new ArrayList<>();
+//        for (int i = 0; i < amount; i++) {
+//            ds[i] = scanner.nextInt();
+//            tempJ = i;
+//            tempsum = sum(ds, tempI, tempJ);
+//            while (tempsum > N) {
+//                tempsum = sum(ds, tempI + 1, tempJ);
+//            }
+//            if (tempsum >= N) {
+//                if (tempsum < min) {
+//                    result.clear();
+//                    result.add(""+(tempI+1)+"-"+(tempJ+1));
+//                    //System.out.println("1:"+(tempI+1)+"-"+(tempJ+1));
+//                    min = tempsum;
+//                } else if (tempsum==min) {
+//                    //System.out.println("2:"+(tempI+1)+"-"+(tempJ+1));
+//                    result.add(""+(tempI+1)+"-"+(tempJ+1));
+//                }
+//            }
+//        }
+//        for (String s: result) {
+//            System.out.println(s);
+//        }
+//    }
+    public static int sum(int[] is, int i, int j) {
+        int sum = 0;
+        //System.out.println("1:"+(i+1)+"-"+(j+1));
+        for (;i <= j; i++) {
+            sum += is[i];
+        }
+        return sum;
+    }
+
+    /**
+     1045. Favorite Color Stripe (30)
+     Eva is trying to make her own color stripe out of a given one. She would like to keep only her
+     favorite colors in her favorite order by cutting off those unwanted pieces and sewing the remaining
+     parts together to form her favorite color stripe.
+     It is said that a normal human eye can distinguish about less than 200 different colors, so Eva's
+     favorite colors are limited. However the original stripe could be very long, and Eva would like to
+     have the remaining favorite stripe with the maximum length. So she needs your help to find her the
+     best result.
+     Note that the solution might not be unique, but you only have to tell her the maximum length. For
+     example, given a stripe of colors {2 2 4 1 5 5 6 3 1 1 5 6}. If Eva's favorite colors are given in
+     her favorite order as {2 3 1 5 6}, then she has 4 possible best solutions {2 2 1 1 1 5 6},
+     {2 2 1 5 5 5 6}, {2 2 1 5 5 6 6}, and {2 2 3 1 1 5 6}.
+     Input Specification:
+     Each input file contains one test case. For each case, the first line contains a positive integer
+     N (<=200) which is the total number of colors involved (and hence the colors are numbered from 1
+     to N). Then the next line starts with a positive integer M (<=200) followed by M Eva's favorite
+     color numbers given in her favorite order. Finally the third line starts with a positive integer
+     L (<=10000) which is the length of the given stripe, followed by L colors on the stripe. All the
+     numbers in a line are separated by a space.
+     Output Specification:
+     For each test case, simply print in a line the maximum length of Eva's favorite stripe.
+     Sample Input:
+     6
+     5 2 3 1 5 6
+     12 2 2 4 1 5 5 6 3 1 1 5 6
+     Sample Output:
+     7
+     思路：动态规划!!!
+     结果：两个测试点运行超时...算法应该没问题...
+     * */
+//    public static void main(String[] s) {
+//        Scanner scanner = new Scanner(System.in);
+//        int N = scanner.nextInt();
+//        int M = scanner.nextInt();
+//        int[] stripe = new int[M];
+//        for (int i = 0; i < M; i++) {
+//            stripe[i] = scanner.nextInt();
+//        }
+//        int L = scanner.nextInt();
+//        //int[] color = new int[L];
+//        int max[][] = new int[M+1][L+1];
+//        for (int i = 0; i < L; i++) {
+//            int c = scanner.nextInt();
+//            c = c<=N?c:N;
+//            for (int j = 0; j < M; j++) {
+//                if (c==stripe[j]) {
+//                    max[j+1][i+1] = Math.max(max[j][i+1],max[j+1][i])+1;
+//                } else {
+//                    max[j+1][i+1] = Math.max(max[j][i+1],max[j+1][i]);
+//                }
+//            }
+//        }
+//        System.out.println(max[M][L]);
+//    }
+
+    /**
+     1046 todo
      * */
 
     /**
-
+     1047. Student List for Course (25)
+     Zhejiang University has 40000 students and provides 2500 courses. Now given the registered
+     course list of each student, you are supposed to output the student name lists of all the courses.
+     Input Specification:
+     Each input file contains one test case. For each case, the first line contains 2 numbers: N
+     (<=40000), the total number of students, and K (<=2500), the total number of courses. Then N
+     lines follow, each contains a student's name (3 capital English letters plus a one-digit number),
+     a positive number C (<=20) which is the number of courses that this student has registered, and
+     then followed by C course numbers. For the sake of simplicity, the courses are numbered from 1 to K.
+     Output Specification:
+     For each test case, print the student name lists of all the courses in increasing order of the
+     course numbers. For each course, first print in one line the course number and the number of
+     registered students, separated by a space. Then output the students' names in alphabetical order.
+     Each name occupies a line.
+     Sample Input:
+     10 5
+     ZOE1 2 4 5
+     ANN0 3 5 2 1
+     BOB5 5 3 4 2 1 5
+     JOE4 1 2
+     JAY9 4 1 2 5 4
+     FRA8 3 4 2 5
+     DON2 2 4 5
+     AMY7 1 5
+     KAT3 3 5 4 2
+     LOR6 4 2 4 1 5
+     Sample Output:
+     1 4
+     ANN0
+     BOB5
+     JAY9
+     LOR6
+     2 7
+     ANN0
+     BOB5
+     FRA8
+     JAY9
+     JOE4
+     KAT3
+     LOR6
+     3 1
+     BOB5
+     4 7
+     BOB5
+     DON2
+     FRA8
+     JAY9
+     KAT3
+     LOR6
+     ZOE1
+     5 9
+     AMY7
+     ANN0
+     BOB5
+     DON2
+     FRA8
+     JAY9
+     KAT3
+     LOR6
+     ZOE1
+     思路：用map来存储
      * */
 
+    /**
+     1048. Find Coins (25)
+     Eva loves to collect coins from all over the universe, including some other planets like Mars.
+     One day she visited a universal shopping mall which could accept all kinds of coins as payments.
+     However, there was a special requirement of the payment: for each bill, she could only use exactly
+     two coins to pay the exact amount. Since she has as many as 105 coins with her, she definitely
+     needs your help. You are supposed to tell her, for any given amount of money, whether or not she
+     can find two coins to pay for it.
+     Input Specification:
+     Each input file contains one test case. For each case, the first line contains 2 positive numbers:
+     N (<=105, the total number of coins) and M(<=103, the amount of money Eva has to pay). The second
+     line contains N face values of the coins, which are all positive numbers no more than 500. All the
+     numbers in a line are separated by a space.
+     Output Specification:
+     For each test case, print in one line the two face values V1 and V2 (separated by a space) such
+     that V1 + V2 = M and V1 <= V2. If such a solution is not unique, output the one with the smallest
+     V1. If there is no solution, output "No Solution" instead.
+     Sample Input 1:
+     8 15
+     1 2 8 7 2 4 11 15
+     Sample Output 1:
+     4 11
+     Sample Input 2:
+     7 14
+     1 8 7 2 4 11 15
+     Sample Output 2:
+     No Solution
+     思路：1.排序（接受输入同时插入排序，O(n2)）；2.从两边向中间检查是否有满足条件的，O(n)
+     思路2：2.接受输入，数组和HasnMap存储，O(n)；2.遍历数组，检查map中有无满足的另一个数及其个数，O(n)。
+     注意：结果要满足的条件（加数最小），以及是否有结果（标志）。
+     结果：运行超时...
+     * */
+    public static void main(String s) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        int[] coins = new int[N];
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < N; i++) {
+            int temp = scanner.nextInt();
+            coins[i] = temp;
+            if (!map.containsKey(temp)) {
+                map.put(temp, 1);
+            } else {
+                Integer integer = map.get(temp);
+                map.put(temp, integer + 1);
+            }
+        }
+        int min = 128, pair;
+        boolean flag = false;
+        for (int i = 0; i < N; i++) {
+            int temp = M - coins[i];
+            if (temp!=coins[i]) {
+
+            } else {
+
+            }
+        }
+    }
+
+    /**
+     1049. Counting Ones (30)
+     The task is simple: given any positive integer N, you are supposed to count the total number
+     of 1's in the decimal form of the integers from 1 to N. For example, given N being 12, there
+     are five 1's in 1, 10, 11, and 12.
+     Input Specification:
+     Each input file contains one test case which gives the positive N (<=230).
+     Output Specification:
+     For each test case, print the number of 1's in one line.
+     Sample Input:
+     12
+     Sample Output:
+     5
+     运行超时...
+     * */
+    public static void main1049(String[] s) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int result = 0;
+        for (int i = 1; i <= N; i++) {
+            result += countOne(i);
+        }
+        System.out.println(result);
+    }
+    public static int countOne(int num) {
+        int result = 0;
+        while (num > 0){
+            if (num%10==1) result++;
+            num = num/10;
+        }
+        return result;
+    }
+
+    /**
+     Given two strings S1 and S2, S = S1 - S2 is defined to be the remaining string after taking all
+     the characters in S2 from S1. Your task is simply to calculate S1 - S2 for any given strings.
+     However, it might not be that simple to do it fast.
+     Input Specification:
+     Each input file contains one test case. Each case consists of two lines which gives S1 and S2,
+     respectively. The string lengths of both strings are no more than 104. It is guaranteed that
+     all the characters are visible ASCII codes and white space, and a new line character signals
+     the end of a string.
+     Output Specification:
+     For each test case, print S1 - S2 in one line.
+     Sample Input:
+     They are students.
+     aeiou
+     Sample Output:
+     Thy r stdnts.
+     思路：HashSet来检查是否有这些字符。
+     * */
 
 }
